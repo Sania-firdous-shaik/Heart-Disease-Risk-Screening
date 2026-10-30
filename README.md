@@ -1,5 +1,12 @@
 # ❤️ Heart Disease Risk Screening
+
 ### A Hybrid Logistic Regression–Random Forest Model-Based Solution
+
+**Live Application:** [Heart Disease Risk Screening](https://heart-disease-risk-screening.onrender.com/)
+
+**GitHub Repository:** [Heart-Disease-Risk-Screening](https://github.com/Sania-firdous-shaik/Heart-Disease-Risk-Screening)
+
+---
 
 ## 📌 Project Overview
 
@@ -163,6 +170,12 @@ The project includes an interactive Streamlit application.
 - Evaluation metric visualization.
 - Educational disclaimer.
 
+### Live Application
+
+🚀 **[Try the Heart Disease Risk Screening Application](https://heart-disease-risk-screening.onrender.com/)**
+
+The application is hosted on Render.
+
 ## 📁 Project Structure
 
 ```text
@@ -194,7 +207,7 @@ Heart-Disease-Risk-Screening/
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Heart-Disease-Risk-Screening.git
+git clone https://github.com/Sania-firdous-shaik/Heart-Disease-Risk-Screening.git
 ```
 
 ### Step 2: Navigate to the Project Directory
@@ -243,17 +256,21 @@ http://localhost:8501
 
 ## ☁️ Deployment
 
-The application can be deployed using Render.
+The application is deployed using **Render**.
 
-**Deployment configuration:**
+**Live URL:** https://heart-disease-risk-screening.onrender.com/
+
+### Deployment Configuration
 
 | Setting | Value |
 |---|---|
-| Environment | Python |
+| Environment | Python 3 |
+| Branch | main |
 | Build Command | `pip install -r requirements.txt` |
 | Start Command | `streamlit run app.py --server.port $PORT --server.address 0.0.0.0` |
+| Hosting Platform | Render |
 
-After deployment, the application can be accessed through its public Render URL.
+The deployed application loads the saved machine learning model and provides an interactive interface for risk assessment.
 
 ## 🔍 Model Interpretation
 
@@ -268,6 +285,8 @@ This provides insights into how individual input features influence the model's 
 - Its predictions are not a substitute for professional medical evaluation.
 - The displayed model score is not a clinically validated probability of developing heart disease.
 - The system should not be used for medical diagnosis or treatment decisions.
+
+**Disclaimer:** This application is intended for preliminary educational screening and is not a clinically validated medical tool.
 
 ## 🔮 Future Enhancements
 
@@ -284,12 +303,9 @@ This provides insights into how individual input features influence the model's 
 
 B.Tech – Artificial Intelligence and Data Science
 
-GitHub: [Saniafirdous-shaik](https://github.com/Saniafirdous-shaik)
-
-LinkedIn: [Sania Firdous Shaik](https://linkedin.com/in/sania-firdous-shaik/)
+- **GitHub:** [Sania Firdous Shaik](https://github.com/Sania-firdous-shaik)
+- **LinkedIn:** [Sania Firdous Shaik](https://linkedin.com/in/sania-firdous-shaik/)
 
 ---
 
 ⭐ If you find this project interesting, consider giving the repository a star!
-
-**Disclaimer:** This application is intended for preliminary educational screening and is not a clinically validated medical tool.
