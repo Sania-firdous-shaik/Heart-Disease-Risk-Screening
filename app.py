@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import joblib
@@ -24,6 +23,10 @@ def load_model():
 
 
 model = load_model()
+
+# Original model class representing heart disease.
+# Verify this against the training dataset.
+DISEASE_CLASS = 0
 
 # =====================================================
 # CUSTOM CSS
@@ -448,7 +451,9 @@ if page == "Risk Assessment":
             use_container_width=True
         )
 
+    # =====================================================
     # PREDICTION
+    # =====================================================
 
     if submitted:
 
@@ -477,14 +482,33 @@ if page == "Risk Assessment":
 
         try:
 
-            prediction = model.predict(input_data)[0]
+            # ORIGINAL MODEL PREDICTION
 
-            probabilities = model.predict_proba(input_data)[0]
+            raw_prediction = int(
+                model.predict(input_data)[0]
+            )
 
-            # Find probability corresponding to class 1
-            positive_class_index = list(model.classes_).index(1)
+            # UPDATED CLASS MAPPING
+            # Original class 0 -> displayed class 1
+            # Original class 1 -> displayed class 0
 
-            score = probabilities[positive_class_index]
+            prediction = int(
+                raw_prediction == DISEASE_CLASS
+            )
+
+            # UPDATED PROBABILITY MAPPING
+
+            probabilities = model.predict_proba(
+                input_data
+            )[0]
+
+            positive_class_index = list(
+                model.classes_
+            ).index(DISEASE_CLASS)
+
+            score = float(
+                probabilities[positive_class_index]
+            )
 
             st.divider()
 
@@ -498,8 +522,8 @@ if page == "Risk Assessment":
                         <p>MODEL SCREENING OUTPUT</p>
                         <h2>Elevated Risk Classification</h2>
                         <p>
-                            The model classified this input
-                            in class 1.
+                            The remapped classification
+                            is class 1.
                         </p>
                         <h3>Model score: {score * 100:.1f}%</h3>
                     </div>
@@ -515,8 +539,8 @@ if page == "Risk Assessment":
                         <p>MODEL SCREENING OUTPUT</p>
                         <h2>Lower Risk Classification</h2>
                         <p>
-                            The model classified this input
-                            in class 0.
+                            The remapped classification
+                            is class 0.
                         </p>
                         <h3>Model score: {score * 100:.1f}%</h3>
                     </div>
@@ -541,13 +565,16 @@ if page == "Risk Assessment":
             st.progress(float(score))
 
             st.caption(
-                "This is the model's predicted score for class 1, "
-                "not a clinically validated probability."
+                f"This score corresponds to original model "
+                f"class {DISEASE_CLASS}, displayed as class 1. "
+                "It is not a clinically validated probability."
             )
 
             st.warning(
                 "This application is an educational screening "
                 "prototype and does not provide a medical diagnosis. "
+                "The configured class mapping must be verified "
+                "against the training dataset. "
                 "The prediction should not be used to make medical "
                 "decisions. Consult a qualified healthcare professional "
                 "for medical evaluation."
@@ -593,6 +620,12 @@ elif page == "Model Overview":
     c2.metric("ROC-AUC", "96.54%")
     c3.metric("Evaluation", "Holdout Test")
 
+    st.caption(
+        "These are the original training notebook metrics. "
+        "Class-specific metrics must be recalculated if "
+        "the positive class definition changes."
+    )
+
     st.divider()
 
     # MODEL COMPARISON
@@ -600,6 +633,7 @@ elif page == "Model Overview":
     st.markdown("### Cross-Validation Model Comparison")
 
     comparison = pd.DataFrame({
+
         "Model": [
             "Logistic Regression",
             "Random Forest",
@@ -613,6 +647,7 @@ elif page == "Model Overview":
             0.892095,
             0.872247
         ]
+
     })
 
     st.bar_chart(
